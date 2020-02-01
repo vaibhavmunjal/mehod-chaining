@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
 """
-	A Simple CRUD Method Chain
+A Simple working CRUD example to show Method Chain
+
+Possible operations are: do_oprn, sum, subtract, multiple,
+						 division, plus, addition, add,
+						 minus, subtraction, cross, multiplication,
+						 product, multiply, divide
 """
 
 class CRUD:
@@ -9,97 +14,165 @@ class CRUD:
 	Class Initialization
 	"""
 	def __init__(self):
-		self.result = None
+		self.result = 0
+		self.changed = False
 
 	def __str__(self):
-		return self.result
+		if self.changed:
+			return str(self.result)
+		return str('No data provided to operate')
 
 
-	def sign_operation(self, *args, operation=None, **kwargs):
+	def set_changed(self):
+		self.changed = True
 
-		self.operation = operation
+	def do_oprn(self, *args, operator=None, **kwargs):
+		"""
+		Do operation
+		i.e. operation = *, -, +, /
+		"""
+		self.operator = operator
 
-		if not self.operation:
-			raise "Error:"
+		if not self.operator:
+			return f'No operator provided'
 
-		# TODO
-		if self.operation == '+':
-			pass
-		elif self.operation == '-':
-			pass
-		elif self.operation == '*':
-			pass
-		elif self.operation == '/':
-			pass
+		if self.operator == '+':
+			return self.sum(*args, **kwargs)
+		elif self.operator == '-':
+			return self.subtract(*args, **kwargs)
+		elif self.operator == '*':
+			return self.multiple(*args, **kwargs)
+		elif self.operator == '/':
+			return self.division(*args, **kwargs)
 		else:
-			raise f'Currently Operation ({self.operation}) is not Applicable'
-
+			return f'Currently Operator ({operator}) is not Applicable'
 
 
 	def sum(self, *args, **kwargs):
 		"""
 		Sum Operation
 		"""
-		pass
+		try:
+			if args:
+				[int(i) for i in args]
+			if kwargs:
+				[int(i) for i in kwargs.values()]
+		except:
+			raise 'Only Integers allowed'
+
+		for i in args:
+			self.result += i
+
+		for i in kwargs.values():
+			self.result += i
+
+		self.set_changed()
+		return self
+
 
 	def subtract(self, *args, **kwargs):
-		return 'mimus'
-
 		"""
 		Subtraction Operation
 		"""
-		pass
+		try:
+			if args:
+				[int(i) for i in args]
+			if kwargs:
+				[int(i) for i in kwargs.values()]
+		except:
+			raise 'Only Integers allowed'
+
+		for i in args:
+			self.result -= i
+
+		for i in kwargs.values():
+			self.result -= i
+
+		self.set_changed()
+		return self
+
 
 	def multiple(self, *args, **kwargs):
 		"""
 		multiplication Operation
 		"""
-		pass
+		try:
+			if args:
+				[int(i) for i in args]
+			if kwargs:
+				[int(i) for i in kwargs.values()]
+		except:
+			raise 'Only Integers allowed'
+
+		for i in args:
+			self.result *= i
+
+		for i in kwargs.values():
+			self.result *= i
+
+		self.set_changed()
+		return self
+
 
 	def division(self, *args, **kwargs):
 		"""
 		multiplication Operation
 		"""
-		pass
+		try:
+			if args:
+				[int(i) for i in args]
+			if kwargs:
+				[int(i) for i in kwargs.values()]
+		except:
+			raise 'Only Integers allowed'
+
+		for i in args:
+			self.result /= i
+
+		for i in kwargs.values():
+			self.result /= i
+
+		self.set_changed()
+		return self
 
 
-	# Add Alias 
+	# Add Alias
 	# To make large chain
 
 
 	# sum Aliases
 	def plus(self, *args, **kwargs):
-		return self.sum(self, *args, **kwargs)
+		return self.sum(*args, **kwargs)
 
 	def addition(self, *args, **kwargs):
-		return self.sum(self, *args, **kwargs)
+		return self.sum(*args, **kwargs)
 
 	def add(self, *args, **kwargs):
-		return self.sum(self, *args, **kwargs)
+		return self.sum(*args, **kwargs)
 
 
 	# Subtract Aliases
 	def minus(self, *args, **kwargs):
-		return self.subtract(self, *args, **kwargs)
+		return self.subtract(*args, **kwargs)
 
 	def subtraction(self, *args, **kwargs):
-		return self.subtract(self, *args, **kwargs)
+		return self.subtract(*args, **kwargs)
 
 
 	# multiply Aliases
 	def cross(self, *args, **kwargs):
-		return self.multiple(self, *args, **kwargs)
+		return self.multiple(*args, **kwargs)
 
 	def multiplication(self, *args, **kwargs):
-		return self.multiple(self, *args, **kwargs)
+		return self.multiple(*args, **kwargs)
 
 	def product(self, *args, **kwargs):
-		return self.multiple(self, *args, **kwargs)
+		return self.multiple(*args, **kwargs)
 
 	def multiply(self, *args, **kwargs):
-		return self.multiple(self, *args, **kwargs)
+		return self.multiple(*args, **kwargs)
 
 
 	# division Aliases
 	def divide(self, *args, **kwargs):
-		return self.division(self, *args, **kwargs)
+		return self.division(*args, **kwargs)
